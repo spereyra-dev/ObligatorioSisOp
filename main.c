@@ -38,8 +38,7 @@ int main() {
             if (!get_user_input("Enter the number of bits to occupy: ", &qty)) {
                 continue;
             }
-            first_fit(header->bitmap, header->bitmap_size, qty);
-            // set_or_clear_bits(1, header->bitmap, start_byte_index, start_bit_index, qty);
+            my_malloc(qty); //Usamos my_malloc para asignar memoria
         } else if (choice == 2){
             if (!get_user_input("Enter the number of bits to clear: ", &qty) || 
                 !get_user_input("Enter in which byte start to clear: ", &start_byte_index) || 

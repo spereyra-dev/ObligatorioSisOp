@@ -24,10 +24,12 @@
 #define STRUCT_UNITS (uint16_t)((sizeof (MemoryChunkHeader) + UNIT_SIZE - 1) / UNIT_SIZE) // will work even if it is exactly divisible by UNIT_SIZE
 #define BITMAP_UNITS (uint16_t)((BITMAP_SIZE + UNIT_SIZE - 1) / UNIT_SIZE)
 #define MAX_MALLOC_SIZE = (size_t)16 * 1024 * 1024 // 16 MB is the maximum malloc size
+#define IS_LARGE_ALLOCATION(units_needed) (units_needed >= (UNITS_PER_CHUNK - STRUCT_UNITS - BITMAP_UNITS))
 //
 typedef unsigned char *Bitmap;
-extern void *first_chunk;
 extern uint16_t chunk_current_id;
+extern void *my_malloc(size_t nbytes);
+// extern void my_free(void *ptr); // TODO implementar
 
 typedef struct MemoryChunkHeader {
     void *addr;
@@ -45,10 +47,12 @@ typedef struct AllocationHeader {
     uint16_t bit_index;
 } AllocationHeader;
 
+extern MemoryChunkHeader *first_chunk; //TODO MemoryChunkHeader* o void*?
 int first_fit(unsigned char *bitmap, size_t bitmap_size, size_t units_needed);
 void print_bitmap(unsigned char *bitmap, size_t bitmap_size);
 void set_or_clear_bits(int set, Bitmap bitmap, uint16_t start_byte_index, uint16_t start_bit_index, uint16_t qty);
 void* create_new_chunk(uint16_t units_needed, int is_large_allocation, MemoryChunkHeader *next);
+void my_malloc_init();
 
 
 #endif // MY_ALLOC_MANAGER_H

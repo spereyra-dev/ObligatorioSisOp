@@ -7,7 +7,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -g
 
 # Source files (.c files)
-CFILES = main.c funcion_first_fit.c funcion_print_bitmap.c funcion_set_or_clear_bits.c create_new_chunk.c
+CFILES = main.c funcion_first_fit.c funcion_print_bitmap.c funcion_set_or_clear_bits.c create_new_chunk.c my_malloc.c
 
 # Header files (.h files)
 HFILES = my_malloc_manager.h
