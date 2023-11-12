@@ -20,6 +20,9 @@
 #define BITMAP_SIZE 16 // in bytes
 #define UNITS_PER_CHUNK (BITMAP_SIZE * 8)
 #define UNIT_SIZE (uint16_t) 16
+#define SET_CHOICE 1
+#define CLEAR_CHOICE 2
+#define EXIT_CHOICE 0
 //
 #define STRUCT_UNITS (uint16_t)((sizeof (MemoryChunkHeader) + UNIT_SIZE - 1) / UNIT_SIZE) // will work even if it is exactly divisible by UNIT_SIZE
 #define BITMAP_UNITS (uint16_t)((BITMAP_SIZE + UNIT_SIZE - 1) / UNIT_SIZE)
@@ -29,7 +32,7 @@
 typedef unsigned char *Bitmap;
 extern uint16_t chunk_current_id;
 extern void *my_malloc(size_t nbytes);
-// extern void my_free(void *ptr); // TODO implementar
+extern void my_free(void *ptr); // TODO implementar
 
 typedef struct MemoryChunkHeader {
     void *addr;
@@ -51,7 +54,7 @@ extern MemoryChunkHeader *first_chunk; //TODO MemoryChunkHeader* o void*?
 int first_fit(unsigned char *bitmap, size_t bitmap_size, size_t units_needed);
 void print_bitmap(unsigned char *bitmap, size_t bitmap_size);
 void set_or_clear_bits(int set, Bitmap bitmap, uint16_t start_byte_index, uint16_t start_bit_index, uint16_t qty);
-void* create_new_chunk(uint16_t units_needed, int is_large_allocation, MemoryChunkHeader *next);
+MemoryChunkHeader* create_new_chunk(uint16_t units_needed, int is_large_allocation, MemoryChunkHeader *next);
 void my_malloc_init();
 
 
