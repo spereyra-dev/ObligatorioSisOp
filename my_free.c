@@ -25,7 +25,7 @@ void my_free(void *ptr) {
     uint16_t byte = header->bit_index / 8;
     uint16_t bit = header->bit_index % 8;
     if (chunk->is_large_allocation){
-        munmap(chunk->addr, chunk->chunk_total_units * UNIT_SIZE);
+        munmap(chunk->addr, chunk->chunk_total_units * UNIT_SIZE); //Liberar espacio memoria
         printf("Freeing chunk %p\n", chunk); // No imprimimos units porque es 0
     }else{
         // Marcar con 0 los used_units del bitmap.

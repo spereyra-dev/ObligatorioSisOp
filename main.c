@@ -30,6 +30,11 @@ int main() {
             if (!get_user_input("Enter the number of bits to occupy: ", &qty)) {
                 continue;
             }
+            if (qty <= 0) { // No tiene sentido reservar 0 bytes o menos
+                printf("Invalid input, number of bits must be greater than 0.\n");
+                continue;
+            }
+            
             ptr = my_malloc(qty);
             printf("Allocated memory at address: %p\n", ptr);
             header = (AllocationHeader *)(((char *)ptr) - sizeof(AllocationHeader));

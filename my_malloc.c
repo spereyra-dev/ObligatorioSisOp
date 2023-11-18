@@ -5,7 +5,7 @@ void my_malloc_init(){
     // create the first chunk
     first_chunk = create_new_chunk(UNITS_PER_CHUNK, 0, NULL);
     if (first_chunk == NULL || first_chunk->bitmap == NULL) {
-        printf("initialization failed");
+        printf("Initialization failed");
     }
     
 }
